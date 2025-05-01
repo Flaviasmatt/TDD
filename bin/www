@@ -87,3 +87,11 @@ function onListening() {
 	debug('Listening on ' + bind);
 }
 
+var db = require('../models');
+db.sequelize.sync({ force: false, logging: true })
+  .then(() => {
+    console.log("Database synchronized");
+  })
+  .catch((err) => {
+    console.error("Error synchronizing database:", err);
+  });
